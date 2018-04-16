@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Jericho",
+  "version": "0.1",
+  "browser_action": {
+    "default_title": "Summerize the Page",
+    "default_icon":{ "16":"icon_128.png",
+    		  "48":"icon_128.png",
+    		  "128":"icon_128.png"}
+  }, 
+
+      "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"],
+      "js": ["jquery-3.3.1.min.js","stopwords.js"]
+    }
+  ],
+   "background": {
+        "persistent": false,
+        "scripts": ["background.js","stopwords.js"]
+    },
+"permissions": [
+        "activeTab"
+    ]
+
+  
+}
