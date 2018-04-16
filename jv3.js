@@ -1,5 +1,5 @@
 var Set, SummaryTool, intersect_safe, process_summary, test;
-var txt, txt2='', title='', content='', summary='';
+var txt, txt2='', content='', summary='';
 
 
 Set = function(initial_data) {
@@ -64,9 +64,9 @@ SummaryTool = function() {
   that.split_content_to_sentences = function(content) {
     var result;
     content = content.replace(/\.(\[\d+\])+/g, ".. ");
-    content = content.replace(/\?+/g, "? . ");
-    content = content.replace(/\!+/g, "! . ");
-    content = content.replace(/\. /g, ". . ");
+    content = content.replace(/\?+/g, "?. ");
+    content = content.replace(/\!+/g, "!. ");
+    content = content.replace(/\. /g, ".. ");
     result = content.split(". ");
     return result;
   };
@@ -137,10 +137,10 @@ SummaryTool = function() {
   that.get_best_sentence = function(paragraph, sentences_dic, size) {
     var best_sentences=[], max_value, min_value, s, sentences, s1, s1_u, s2, i,j,k, len, min, prev;
     sentences = that.split_content_to_sentences(paragraph);
-    console.log(sentences);
+
     if (sentences.length < size) {
 
-     return sentences.join(". ");
+     return sentences.join('');
     }
       
 
@@ -149,7 +149,7 @@ SummaryTool = function() {
       best_sentences.push(sentences[i]);    // used to initialise best_sentences[]
 
     }
-   // console.log(best_sentences);
+
 
 
   for(j = size; j < sentences.length ; j++){
@@ -170,23 +170,19 @@ SummaryTool = function() {
   }
 
         if(sentences_dic[s1] > sentences_dic[prev]){
-          //console.log(j);
+
           best_sentences.splice(min,1);
-          //console.log(best_sentences);
           best_sentences.splice(size-1,0,s3);
-          //console.log("Swapped: ",s1_u,"-",sentences_dic[s1]," on :",prev,"-",sentences_dic[prev]);
-          //console.log(best_sentences);
         }
           
     }
 
-    best_sentences.join(". ");
-    //console.log(best_sentences);
+    best_sentences.join('');
     return best_sentences;
   };
 
-  that.get_summary = function(title, content, sentences_dic) {
-    var p, paragraphs, sentence, summary, i, len, size=1;
+  that.get_summary = function(content, sentences_dic, size) {
+    var p, paragraphs, sentence, summary, i, len;
     summary = [];
       sentence = that.get_best_sentence(content, sentences_dic, size);
       if (sentence) {
@@ -198,12 +194,28 @@ SummaryTool = function() {
   return that;
 };
 
-test = function(title, content) {
-  var content, sentences_dic, st, summary, title;
+test = function(content, size) {
+  var content, sentences_dic, st, summary='';
+  var content1 = content;
   st = SummaryTool();
-  sentences_dic = st.get_sentences_ranks(content);
-  //console.log(sentences_dic);
-  summary = st.get_summary(title, content, sentences_dic);
+  if(content.match(/\n+/g)){
+    console.log();
+    content1 = content1.split(/\n+/g);
+
+    for(var i = 0; i<content1.length; i++){
+      
+      sentences_dic = st.get_sentences_ranks(content1[i]+'');
+      summary = summary + st.get_summary(content1[i]+'', sentences_dic, size) + '\n\n';
+      console.log(summary);
+}
+  }
+  else{
+    sentences_dic = st.get_sentences_ranks(content);
+    summary = st.get_summary(content, sentences_dic, size);
+
+  }
+  
+
 
   return summary;
 };
