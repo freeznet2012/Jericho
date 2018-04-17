@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Jericho</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="description">
+  <meta content="" name="author">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="http://wenzhixin.net.cn/p/bootstrap-table/src/bootstrap-table.css" rel="stylesheet" type="text/css">
+  <link href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.bootstrap.min.css" rel="stylesheet">
+  <link href="http://protostrap.com/Assets/gv/css/gv.bootstrap-form.css" rel="stylesheet" type="text/css">
+  <script src="jquery-3.3.1.min.js">
+  </script>
+  <script src="loadingoverlay.min.js">
+  </script>
+  <script src="jv3.js">
+  </script>
+  <script src="content1.js">
+  </script>
+
+
+
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <form action="../submit" class="form-horizontal" data-parsley-validate="" id="formentry" name="formentry" novalidate="" role="form">
+        <div class="container-fluid shadow">
+          <div class="row">
+            <div class="row viewerror clearfix hidden" id="valErr">
+              <div class="alert alert-danger">
+                Oops! Seems there are some errors..
+              </div>
+            </div>
+            <div class="row viewerror clearfix hidden" id="valOk">
+              <div class="alert alert-success">
+                Yay! ..
+              </div>
+            </div>
+            <div class="row" style="display: block;">
+              <div class="col-md-12">
+                <div class="form-group brdbot">
+                  <h3>Jericho</h3>
+                  <div class="controls col-sm-9">
+                    <p data-control-type="header" data-default-is-header="true" data-default-label="Header" id="field1">An Extractive Text Summerizer using Text Rank</p><span class="error" id="errId1"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <label class="control-label control-label-left col-sm-3" for="textarea1">Input Text <span class="req">*</span></label>
+                      <div class="controls col-sm-9">
+                        <textarea class="form-control k-textbox" data-parsley-errors-container="#errId2" data-role="textarea" id="textarea1" name="textarea1" required="required" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea> <span class="error" id="errId2"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="control-label control-label-left col-sm-3" for="size">Size <span class="req">*</span></label>
+                      <div class="controls col-sm-9">
+                        <span class="k-widget k-numerictextbox form-control" style=""><span class="k-numeric-wrap k-state-default"><input aria-disabled="false" aria-readonly="false" class="k-formatted-value form-control k-input" data-parsley-errors-container="#errId3" id="size" name="size" style="display: inline-block;" tabindex="0" type="text"><input value="1" aria-disabled="false" aria-readonly="false" aria-valuenow="" class="form-control k-input" data-error-container="#errfield6" data-format="integer" data-parsley-errors-container="#errId3" data-role="numeric" id="size" name="size" required="required" role="spinbutton" style="display: none;" type="text" value=""><span class="k-select"><span class="k-link"><span class="k-icon k-i-arrow-n" title="Increase value">Increase value</span></span> <span class="k-link"><span class="k-icon k-i-arrow-s" title="Decrease value">Decrease value</span></span></span></span></span> <span class="error" id="errId3"></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-lg btn-success" id="click" name="click" type="button">Summarize</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group brdbot">
+                  <h4>Summarized Text:</h4>
+                  <div class="controls col-sm-9">
+                    <p data-control-type="header" data-default-is-header="true" data-default-label="Header" id="field20"></p><span class="error" id="errId4"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <p id="textarea2"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="http://cdn.kendostatic.com/2014.1.318/js/jquery.min.js">
+  </script> 
+  <script src="http://protostrap.com/Assets/bootstrap/js/bootstrap.min.js" type="text/javascript">
+  </script> 
+  <script src="http://wenzhixin.net.cn/p/bootstrap-table/src/bootstrap-table.js" type="text/javascript">
+  </script> 
+  <script src="http://protostrap.com/Assets/inputmask/js/jquery.inputmask.js" type="text/javascript">
+  </script> 
+  <script src="http://cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js">
+  </script> 
+  <script src="http://protostrap.com/Assets/parsely/parsley.extend.js" type="text/javascript">
+  </script> 
+  <script src="http://protostrap.com/Assets/parsely/2.0/parsley.js" type="text/javascript">
+  </script> 
+  <script src="http://protostrap.com/Assets/download.js" type="text/javascript">
+  </script> 
+  <script src="http://protostrap.com/Assets/protostrap.js" type="text/javascript">
+  </script>
+</body>
+</html>

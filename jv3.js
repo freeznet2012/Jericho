@@ -1,5 +1,7 @@
 var Set, SummaryTool, intersect_safe, process_summary, test;
-var txt, txt2='', content='', summary='';
+var txt, txt2 = '',
+  content = '',
+  summary = '';
 
 
 Set = function(initial_data) {
@@ -86,7 +88,7 @@ SummaryTool = function() {
     }
     result = intersect_safe(s1, s2).length / ((s1.length + s2.length) / 2);
     return result;
-  };  
+  };
   that.format_sentence = function(sentence) {
     var result;
     if (typeof sentence === "undefined") {
@@ -99,7 +101,7 @@ SummaryTool = function() {
     var i, j, n, num, row, score, sentences, sentences_dic, values, i, j, k, l;
     sentences = that.split_content_to_sentences(content);
     n = sentences.length;
-    values = 
+    values =
       function() {
         var i, results;
         results = [];
@@ -114,7 +116,7 @@ SummaryTool = function() {
           })());
         }
         return results;
-    }();
+      }();
     for (i = 0; n >= 0 ? i <= n : i >= n; i = (n >= 0 ? ++i : --i)) {
       for (j = 0; n >= 0 ? j <= n : j >= n; j = (n >= 0 ? ++j : --j)) {
         values[i][j] = that.sentences_intersection(sentences[i], sentences[j]);
@@ -135,46 +137,47 @@ SummaryTool = function() {
   };
 
   that.get_best_sentence = function(paragraph, sentences_dic, size) {
-    var best_sentences=[], max_value, min_value, s, sentences, s1, s1_u, s2, i,j,k, len, min, prev;
+    var best_sentences = [],
+      max_value, min_value, s, sentences, s1, s1_u, s2, i, j, k, len, min, prev;
     sentences = that.split_content_to_sentences(paragraph);
 
     if (sentences.length < size) {
 
-     return sentences.join('');
-    }
-      
-
-    for(i = 0; size < sentences.length ? i < size : i < sentences.length ; i++){
- 
-      best_sentences.push(sentences[i]);    // used to initialise best_sentences[]
-
+      return sentences.join('');
     }
 
 
+    for (i = 0; size < sentences.length ? i < size : i < sentences.length; i++) {
 
-  for(j = size; j < sentences.length ; j++){
+      best_sentences.push(sentences[i]); // used to initialise best_sentences[]
 
-    s1 = that.format_sentence(sentences[j]); //s1 is the next sentence to compare
-    var s3 = "";
-    s3 = sentences[j];
-    min_value = 99999;
-    for(k = 0; k < size ; k++){
+    }
 
-     s2 = that.format_sentence(best_sentences[k]); // s2 is kth element in the best_sentences array
-      if(sentences_dic[s2] < min_value){
-        min_value = sentences_dic[s2];
-        min = k;
-        prev = s2;
 
-      }
-  }
 
-        if(sentences_dic[s1] > sentences_dic[prev]){
+    for (j = size; j < sentences.length; j++) {
 
-          best_sentences.splice(min,1);
-          best_sentences.splice(size-1,0,s3);
+      s1 = that.format_sentence(sentences[j]); //s1 is the next sentence to compare
+      var s3 = "";
+      s3 = sentences[j];
+      min_value = 99999;
+      for (k = 0; k < size; k++) {
+
+        s2 = that.format_sentence(best_sentences[k]); // s2 is kth element in the best_sentences array
+        if (sentences_dic[s2] < min_value) {
+          min_value = sentences_dic[s2];
+          min = k;
+          prev = s2;
+
         }
-          
+      }
+
+      if (sentences_dic[s1] > sentences_dic[prev]) {
+
+        best_sentences.splice(min, 1);
+        best_sentences.splice(size - 1, 0, s3);
+      }
+
     }
 
     best_sentences.join('');
@@ -184,40 +187,37 @@ SummaryTool = function() {
   that.get_summary = function(content, sentences_dic, size) {
     var p, paragraphs, sentence, summary, i, len;
     summary = [];
-      sentence = that.get_best_sentence(content, sentences_dic, size);
-      if (sentence) {
-        summary.push(sentence);
-      }
-    
+    sentence = that.get_best_sentence(content, sentences_dic, size);
+    if (sentence) {
+      summary.push(sentence);
+    }
+
     return summary.join("\n");
   };
   return that;
 };
 
 test = function(content, size) {
-  var content, sentences_dic, st, summary='';
+  var content, sentences_dic, st, summary = '';
   var content1 = content;
   st = SummaryTool();
-  if(content.match(/\n+/g)){
+  if (content.match(/\n+/g)) {
     console.log();
     content1 = content1.split(/\n+/g);
 
-    for(var i = 0; i<content1.length; i++){
-      
-      sentences_dic = st.get_sentences_ranks(content1[i]+'');
-      summary = summary + st.get_summary(content1[i]+'', sentences_dic, size) + '\n\n';
+    for (var i = 0; i < content1.length; i++) {
+
+      sentences_dic = st.get_sentences_ranks(content1[i] + '');
+      summary = summary + st.get_summary(content1[i] + '', sentences_dic, size) + '\n\n';
       console.log(summary);
-}
-  }
-  else{
+    }
+  } else {
     sentences_dic = st.get_sentences_ranks(content);
     summary = st.get_summary(content, sentences_dic, size);
 
   }
-  
+
 
 
   return summary;
 };
-
-
