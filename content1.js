@@ -13,7 +13,7 @@ $(document).ready(function() {
 
     setTimeout(function() {
       $.LoadingOverlay("hide");
-    }, 1000);
+    }, 200);
     event.preventDefault();
   });
 });

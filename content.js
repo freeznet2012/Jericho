@@ -8,7 +8,7 @@
 
   $("p").each(function(index) {
     content = $(this).text();
-    summary = test(content, 1);
+    summary = test(content, 0);
     $(this).text(summary);
   });
 
@@ -21,7 +21,7 @@
       content = content.split(/\n+/g);
       console.log(content[0]);
       for (var i = 0; i < content.length; i++) {
-        content[i] = test(content[i], 1);
+        content[i] = test(content[i], 0);
       }
       console.log(content[0]);
       summary = content.join('\n\n');

@@ -5,9 +5,9 @@
   "browser_action": {
     "default_title": "Summerize the Page",
     "default_icon": {
-      "16": "icon_128.png",
-      "48": "icon_128.png",
-      "128": "icon_128.png"
+      "16": "img/icon_128.png",
+      "48": "img/icon_128.png",
+      "128": "img/icon_128.png"
     }
   },
 

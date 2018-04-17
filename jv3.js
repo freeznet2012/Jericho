@@ -65,7 +65,7 @@ SummaryTool = function() {
   that = this;
   that.split_content_to_sentences = function(content) {
     var result;
-    content = content.replace(/\.(\[\d+\])+/g, ".. ");
+    content = content.replace(/\[\w\]|\[\d+\]/g, "");
     content = content.replace(/\?+/g, "?. ");
     content = content.replace(/\!+/g, "!. ");
     content = content.replace(/\. /g, ".. ");
@@ -140,7 +140,11 @@ SummaryTool = function() {
     var best_sentences = [],
       max_value, min_value, s, sentences, s1, s1_u, s2, i, j, k, len, min, prev;
     sentences = that.split_content_to_sentences(paragraph);
-
+    if(size == 0){
+      size = sentences.length/2;
+      size = size.toFixed(0);
+      console.log(size);
+    }
     if (sentences.length < size) {
 
       return sentences.join('');
@@ -212,12 +216,14 @@ test = function(content, size) {
       console.log(summary);
     }
   } else {
+
+
     sentences_dic = st.get_sentences_ranks(content);
     summary = st.get_summary(content, sentences_dic, size);
 
   }
 
-
+  summary = summary.replace(".,", ". ")
 
   return summary;
 };
