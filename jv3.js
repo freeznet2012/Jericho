@@ -218,7 +218,7 @@ test = function(content, size) {
   } else {
 
 
-    sentences_dic = st.get_sentences_ranks(content);
+    sentences_dic = st.get_sentences_ranks(content); console.log(sentences_dic);
     summary = st.get_summary(content, sentences_dic, size);
 
   }
